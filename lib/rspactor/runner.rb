@@ -3,7 +3,8 @@ require 'rspactor'
 module RSpactor
   class Runner
     def self.start(options = {})
-      new(Dir.pwd, options).start
+      run_in = options.delete(:run_in) || Dir.pwd
+      new(run_in, options).start
     end
     
     attr_reader :dir, :options, :inspector, :interactor
@@ -48,7 +49,7 @@ module RSpactor
     end
 
     def run_all_specs
-      run_spec_command('spec')
+      run_spec_command(File.join(dir, 'spec'))
     end
 
     def run_spec_command(paths)

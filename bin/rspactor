@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
 require 'rspactor/runner'
 
-RSpactor::Runner.start(:coral => ARGV.include?('--coral'))
+RSpactor::Runner.start({
+  :coral => ARGV.delete('--coral'),
+  :run_in => ARGV.last
+})
